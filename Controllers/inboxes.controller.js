@@ -1,6 +1,6 @@
 // import supabase from '../supabaseClient';
 
-export const postGetSupport = async (id, data) => {
+const postInbox = async (id, data) => {
   const insertedData = await fetch(
     'https://teacupnet-backend.vercel.app/api/inboxData',
     {
@@ -13,3 +13,4 @@ export const postGetSupport = async (id, data) => {
   );
   return insertedData;
 };
+module.exports = { postInbox };

@@ -1,4 +1,4 @@
-export const getBlogs = async (email) => {
+const getBlogs = async (email) => {
   const data = await fetch(
     `https://teacupnet-backend.vercel.app/dashboard/blogs/${email}`,
     {
@@ -11,7 +11,8 @@ export const getBlogs = async (email) => {
   // console.log(data);
   return data.json();
 };
-export const getBlog = async (email, id) => {
+
+const getBlog = async (email, id) => {
   const data = await fetch(
     `https://teacupnet-backend.vercel.app/dashboard/blogs/${email}/${id}`,
     {
@@ -23,3 +24,4 @@ export const getBlog = async (email, id) => {
   );
   return data.json();
 };
+module.exports = { getBlogs, getBlog };
