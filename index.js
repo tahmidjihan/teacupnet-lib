@@ -1,5 +1,4 @@
-const { postInbox } = require('./Controllers/inboxes.controller');
-const { getBlogs, getBlog } = require('./Controllers/blogs.controller');
+const data = require('./Controllers/data.controller');
 
 class tc {
   #clientId;
@@ -9,14 +8,25 @@ class tc {
     this.#clientId = clientId;
     this.#clientKey = clientKey;
   }
-  sendInbox(id, data) {
-    return postInbox(id, data);
-  }
-  blogs(email) {
-    return getBlogs(email);
-  }
-  sendBlog(email, id) {
-    return getBlog(email, id);
-  }
+  // basic methods
+  static data = class {
+    sendInbox(id, data) {
+      return data.postInbox(id, data);
+    }
+    blogs(email) {
+      // console.log('here is the blogs');
+      return data.getBlogs(email);
+    }
+    blog(email, id) {
+      // console.log('here is the blog');
+      return data.getBlog(email, id);
+    }
+  };
+  // analytics
+  static analytics = class {
+    // future methods
+    track() {}
+  };
 }
-module.exports = tc;
+// module.exports = tc;
+exports.default = tc;
