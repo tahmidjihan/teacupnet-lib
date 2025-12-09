@@ -1,4 +1,4 @@
-import fetchAPI from '../Functions/FetchAPI.';
+import fetchAPI from '../Functions/FetchAPI';
 import initial from '../index.js';
 const getBlogs = async () => {
   const email = initial.clientEmail;

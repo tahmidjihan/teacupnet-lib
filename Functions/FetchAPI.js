@@ -1,4 +1,4 @@
-import initial from './index.js';
+import initial from '../index.js';
 export default async function fetchAPI(path, method = 'GET', body = null) {
   const data = await fetch(`https://teacupnet-backend.vercel.app/${path}`, {
     method: method,
