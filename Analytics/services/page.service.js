@@ -11,16 +11,15 @@ function trackRoute() {
 
 function trackPageView() {
   document.addEventListener('scroll', () => {
-    const scrollTop =
-      document.documentElement.scrollTop || document.body.scrollTop;
-    const scrollHeight =
-      document.documentElement.scrollHeight || document.body.scrollHeight;
-    const clientHeight =
-      document.documentElement.clientHeight || document.body.clientHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
 
-    const percent = (scrollTop / (scrollHeight - clientHeight)) * 100;
+    const percent = Math.ceil(
+      (scrollTop / (scrollHeight - clientHeight)) * 100
+    );
 
-    console.log(percent.toFixed(2) + '% viewed');
+    // console.log(percent + '% viewed');
   });
 }
 

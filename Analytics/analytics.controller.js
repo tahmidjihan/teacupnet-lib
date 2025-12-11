@@ -1,6 +1,6 @@
 import trackClicks from './services/click.service';
 import page from './services/page.service';
-
+import forms from './services/forms.service';
 function track(id) {
   // console.log('tracking begins right here');
   const body = document.getElementById(id);
@@ -10,6 +10,8 @@ function track(id) {
   //pages
   page.trackRoute();
   page.trackPageView();
-  // trackRoute();
+
+  // forms
+  forms.trackForms();
 }
 export default { track };
