@@ -1,9 +1,14 @@
 import fetchAPI from '../Functions/FetchAPI';
 import fingerprint from './fingerprint';
+import data from './data.controller';
 export default function save() {
-  return fetchAPI(`api/analytics`, 'PUT', {
-    data: data,
-    fingerprint: fingerprint(),
-  });
+  // const time = Date.now()
+  setInterval(() => {
+    fetchAPI('api/analytics', 'POST', {
+      // time: time(),
+      data: data.data,
+      fingerprint: fingerprint(),
+    });
+  }, 5000);
 }
 // export default { save };

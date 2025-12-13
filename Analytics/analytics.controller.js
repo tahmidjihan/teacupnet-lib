@@ -8,10 +8,10 @@ function track() {
   //clicks
   trackClicks();
   //pages
-  page.trackRoute();
-  page.trackPageView();
+  // page.trackRoute();
+  page.track();
 
   // forms
-  forms.trackForms();
+  forms.track();
 }
 export default { track };

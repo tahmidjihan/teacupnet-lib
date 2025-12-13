@@ -3,8 +3,15 @@ const data = {
   form: [],
   page: [],
 };
-const setData = (type, data) => {
-  data[type].push(data);
+const setData = (type, result) => {
+  if (type == 'page') {
+    data.page.map((page) => {
+      if (page.page == result.page) {
+        page.percentage = result.percentage;
+      }
+    });
+  }
+  data[type].push(result);
   return data;
 };
 
