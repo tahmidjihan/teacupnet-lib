@@ -1,22 +1,32 @@
 import data from '../data.controller';
+
+let currentPath = window.location.pathname;
+let topPercent = 0;
+
 function trackRoute() {
-  let path;
   ['pushState', 'replaceState'].forEach((method) => {
     const original = history[method];
     history[method] = function () {
-      // path = window.location.pathname;
-      data.setData('page', {
-        page: window.location.pathname,
-        percentage: 0,
-      });
-      return original.apply(this, arguments);
+      const result = original.apply(this, arguments);
+      
+      // New page navigation detected
+      const newPath = window.location.pathname;
+      if (newPath !== currentPath) {
+        // Initialize new page with 0%
+        currentPath = newPath;
+        topPercent = 0;
+        data.setData('page', {
+          page: currentPath,
+          percentage: 0,
+        });
+      }
+      
+      return result;
     };
   });
-  return path;
 }
 
 function trackPageView() {
-  let topPercent = 0;
   document.addEventListener('scroll', () => {
     const scrollTop = document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight;
@@ -25,22 +35,32 @@ function trackPageView() {
     const percent = Math.ceil(
       (scrollTop / (scrollHeight - clientHeight)) * 100
     );
-    // return percent;
+    
+    // Update only if percentage increased
     if (percent > topPercent) {
       topPercent = percent;
+      
+      // Update the data with new percentage
+      data.setData('page', {
+        page: currentPath,
+        percentage: topPercent,
+      });
     }
-    // console.log(percent + '% viewed');
   });
-  return topPercent;
 }
+
 function track() {
-  const route = trackRoute() || window.location.pathname;
-  const percentage = trackPageView();
-  console.log(route);
+  // Initialize current page
   data.setData('page', {
-    page: route,
-    percentage: percentage,
+    page: currentPath,
+    percentage: 0,
   });
+  
+  // Set up route tracking for navigation
+  trackRoute();
+  
+  // Set up scroll tracking
+  trackPageView();
 }
 
 export default {
