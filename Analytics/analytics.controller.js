@@ -2,14 +2,12 @@ import clicks from './services/click.service';
 import page from './services/page.service';
 import forms from './services/forms.service';
 import save from './save';
-function track() {
-  // console.log('tracking begins right here');
-  // const body = document.getElementById(id);
 
-  //clicks
+function track() {
+  // Track button clicks
   clicks.track();
-  //pages
-  // page.trackRoute();
+  
+  // Track page views and scrolling
   page.track();
 
   // forms

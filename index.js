@@ -7,7 +7,6 @@ export const initial = {
 };
 
 function init(clientID, clientKey) {
-  // return new tc(clientId, clientKey);
   if (!clientID || !clientKey) {
     return {
       error: 'Invalid Credentials',
@@ -16,7 +15,6 @@ function init(clientID, clientKey) {
   }
   initial.clientID = clientID;
   initial.clientKey = clientKey;
-  // console.log(clientID + ' and ' + clientKey);
   return {
     data: dataController,
     analytics: analytics,

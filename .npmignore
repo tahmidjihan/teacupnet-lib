@@ -1,0 +1,44 @@
+# Ignore development files
+.git/
+.gitignore
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Ignore editor directories
+.vscode/
+.idea/
+*.sublime-*
+
+# Ignore images and design files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.excalidraw
+
+# Ignore development dependencies
+node_modules/
+
+# Ignore test files
+test/
+tests/
+*.test.js
+*.spec.js
+
+# Ignore build artifacts
+dist/
+build/
+
+# Ignore documentation source files
+docs/
+
+# Ignore CI/CD files
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Ignore environment files
+.env
+.env.*

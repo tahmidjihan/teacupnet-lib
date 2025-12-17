@@ -1,7 +1,19 @@
 {
   "name": "teacupnet-lib",
   "version": "1.0.0",
-  "description": "A library for connecting to teacupnet ",
+  "description": "A powerful JavaScript library for integrating TeacupNet analytics and data management. Track user interactions, page views, form completions, and seamlessly connect to the TeacupNet backend.",
+  "keywords": [
+    "analytics",
+    "tracking",
+    "teacupnet",
+    "user-analytics",
+    "form-tracking",
+    "page-tracking",
+    "click-tracking",
+    "visitor-tracking",
+    "fingerprinting",
+    "web-analytics"
+  ],
   "homepage": "https://github.com/tahmidjihan/teacupnet-lib#readme",
   "bugs": {
     "url": "https://github.com/tahmidjihan/teacupnet-lib/issues"
@@ -10,12 +22,25 @@
     "type": "git",
     "url": "git+https://github.com/tahmidjihan/teacupnet-lib.git"
   },
-  "exports": "./index.js",
   "license": "ISC",
   "author": "Tahmid Jihan, Teacupnet",
   "type": "module",
   "main": "index.js",
+  "exports": "./index.js",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "Analytics/",
+    "Controllers/",
+    "Functions/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
