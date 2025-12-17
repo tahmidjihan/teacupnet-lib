@@ -6,13 +6,16 @@ const data = {
 const setData = (type, result) => {
   if (type === 'page') {
     // Find existing page entry
-    const existingPageIndex = data.page.findIndex((page) => page.page === result.page);
-    
+    const existingPageIndex = data.page.findIndex(
+      (page) => page.page === result.page
+    );
+
     if (existingPageIndex !== -1) {
       // Update only if new percentage is higher
-      const currentPercentage = parseFloat(data.page[existingPageIndex].percentage) || 0;
+      const currentPercentage =
+        parseFloat(data.page[existingPageIndex].percentage) || 0;
       const newPercentage = parseFloat(result.percentage) || 0;
-      
+
       if (newPercentage > currentPercentage) {
         data.page[existingPageIndex].percentage = result.percentage;
       }
@@ -22,13 +25,16 @@ const setData = (type, result) => {
     }
   } else if (type === 'form') {
     // Find existing form entry
-    const existingFormIndex = data.form.findIndex((form) => form.form === result.form);
-    
+    const existingFormIndex = data.form.findIndex(
+      (form) => form.form === result.form
+    );
+
     if (existingFormIndex !== -1) {
       // Update only if new percentage is higher
-      const currentPercent = parseFloat(data.form[existingFormIndex].percent) || 0;
+      const currentPercent =
+        parseFloat(data.form[existingFormIndex].percent) || 0;
       const newPercent = parseFloat(result.percent) || 0;
-      
+
       if (newPercent > currentPercent) {
         data.form[existingFormIndex].percent = result.percent;
       }
@@ -40,8 +46,45 @@ const setData = (type, result) => {
     // For other types (like 'button'), just push without deduplication
     data[type].push(result);
   }
-  
+
   return data;
 };
 
 export default { setData, data };
+// "analytics": [
+//         {
+//             "fingerprint": "QVQDAEucFmhRj6l7AAAAAElFTkSuQmCC",
+//             "data": {
+//                 "button": [
+//                     {
+//                         "page": "/",
+//                         "button": "Get Started"
+//                     },
+//                     {
+//                         "page": "/",
+//                         "button": "close"
+//                     }
+//                 ],
+//                 "page": [
+//                     {
+//                         "page": "/Blogs",
+//                         "percentage": 100
+//                     },
+//                     {
+//                         "page": "/",
+//                         "percentage": 100
+//                     },
+//                     {
+//                         "page": "/Dashboard/Blogs",
+//                         "percentage": 0
+//                     }
+//                 ],
+//                 "form": [
+//                     {
+//                         "form": "Contact Us",
+//                         "percent": "55.6"
+//                     }
+//                 ]
+//             }
+//         }
+//     ]

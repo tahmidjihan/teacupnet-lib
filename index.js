@@ -2,20 +2,21 @@ import dataController from './Controllers/data.controller.js';
 import analytics from './Analytics/analytics.controller.js';
 
 export const initial = {
-  clientEmail: '',
+  clientID: '',
   clientKey: '',
 };
 
-function init(clientEmail, clientKey) {
+function init(clientID, clientKey) {
   // return new tc(clientId, clientKey);
-  if (!clientEmail || !clientKey) {
+  if (!clientID || !clientKey) {
     return {
       error: 'Invalid Credentials',
-      message: 'Please provide clientEmail and clientKey',
+      message: 'Please provide clientID and clientKey',
     };
   }
-  initial.clientEmail = clientEmail;
+  initial.clientID = clientID;
   initial.clientKey = clientKey;
+  // console.log(clientID + ' and ' + clientKey);
   return {
     data: dataController,
     analytics: analytics,

@@ -22,7 +22,7 @@ function track() {
 
     data.setData('form', {
       form: form.dataset.formName || heading?.innerText || 'unknown-form',
-      percent: percent.toFixed(1),
+      percentage: Math.ceil(percent),
     });
   });
 }

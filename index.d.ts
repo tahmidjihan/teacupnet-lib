@@ -1,3 +1,3 @@
 declare module 'teacupnet-lib' {
-  export default function init(clientEmail: string, clientKey: string): any;
+  export default function init(clientID: string, clientKey: string): any;
 }
