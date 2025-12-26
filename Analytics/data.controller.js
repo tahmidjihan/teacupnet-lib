@@ -3,6 +3,62 @@ const data = {
   form: [],
   page: [],
 };
+const prevData = {
+  button: [],
+  form: [],
+  page: [],
+};
+const clearData = () => {
+  prevData.button = [...data.button];
+  prevData.form = [...data.form];
+  prevData.page = [...data.page];
+  data.button = [];
+  data.form = [];
+  data.page = [];
+};
+
+const getNewData = () => {
+  const newData = {
+    button: [],
+    form: [],
+    page: [],
+  };
+
+  // Compare buttons - only include if not in prevData
+  data.button.forEach((btn) => {
+    const isDuplicate = prevData.button.some(
+      (prevBtn) => prevBtn.button === btn.button && prevBtn.page === btn.page
+    );
+    if (!isDuplicate) {
+      newData.button.push(btn);
+    }
+  });
+
+  // Compare pages - only include if page+percentage combo not in prevData
+  data.page.forEach((pg) => {
+    const isDuplicate = prevData.page.some(
+      (prevPg) =>
+        prevPg.page === pg.page && prevPg.percentage === pg.percentage
+    );
+    if (!isDuplicate) {
+      newData.page.push(pg);
+    }
+  });
+
+  // Compare forms - only include if form+percent combo not in prevData
+  data.form.forEach((frm) => {
+    const isDuplicate = prevData.form.some(
+      (prevFrm) =>
+        prevFrm.form === frm.form && prevFrm.percent === frm.percent
+    );
+    if (!isDuplicate) {
+      newData.form.push(frm);
+    }
+  });
+
+  return newData;
+};
+
 const setData = (type, result) => {
   if (type === 'page') {
     // Find existing page entry
@@ -50,4 +106,4 @@ const setData = (type, result) => {
   return data;
 };
 
-export default { setData, data };
+export default { setData, data, clearData, getNewData };

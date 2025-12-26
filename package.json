@@ -1,6 +1,6 @@
 {
   "name": "teacupnet-lib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A powerful JavaScript library for integrating TeacupNet analytics and data management. Track user interactions, page views, form completions, and seamlessly connect to the TeacupNet backend.",
   "keywords": [
     "analytics",
