@@ -1,6 +1,6 @@
-# TeacupNet Library
+# Teacup Library
 
-A powerful JavaScript library for integrating TeacupNet analytics and data management capabilities into your web applications. Track user interactions, page views, form completions, and seamlessly connect to the TeacupNet backend.
+A powerful JavaScript library for integrating Teacup analytics and data management capabilities into your web applications. Track user interactions, page views, form completions, and seamlessly connect to the Teacup backend.
 
 ## Features
 
@@ -14,7 +14,7 @@ A powerful JavaScript library for integrating TeacupNet analytics and data manag
 ## Installation
 
 ```bash
-npm install teacupnet-lib
+npm install teacupweb
 ```
 
 ## Quick Start
@@ -22,24 +22,24 @@ npm install teacupnet-lib
 ### 1. Initialize the Library
 
 ```javascript
-import teacupnet from 'teacupnet-lib';
+import teacup from 'teacupweb';
 
 // Initialize with your credentials
-const client = teacupnet('YOUR_CLIENT_ID', 'YOUR_CLIENT_KEY');
+const client = teacup('YOUR_CLIENT_ID', 'YOUR_CLIENT_KEY');
 
 if (client.error) {
   console.error(client.message);
 } else {
-  console.log('TeacupNet initialized successfully!');
+  console.log('Teacup initialized successfully!');
 }
 ```
 
 ### 2. Enable Analytics Tracking
 
 ```javascript
-import teacupnet from 'teacupnet-lib';
+import teacup from 'teacupweb';
 
-const client = teacupnet('YOUR_CLIENT_ID', 'YOUR_CLIENT_KEY');
+const client = teacup('YOUR_CLIENT_ID', 'YOUR_CLIENT_KEY');
 
 // Start tracking analytics
 client.analytics.track();
@@ -55,9 +55,9 @@ That's it! The library will now automatically track:
 
 ### Initialization
 
-#### `teacupnet(clientID, clientKey)`
+#### `teacup(clientID, clientKey)`
 
-Initializes the TeacupNet library with your credentials.
+Initializes the Teacup library with your credentials.
 
 **Parameters:**
 
@@ -72,7 +72,7 @@ Initializes the TeacupNet library with your credentials.
 **Example:**
 
 ```javascript
-const client = teacupnet('123', 'secretKey456');
+const client = teacup('123', 'secretKey456');
 ```
 
 ### Analytics Module
@@ -223,9 +223,9 @@ Tracks form completion in real-time:
 If you want more control over tracking:
 
 ```javascript
-import teacupnet from 'teacupnet-lib';
+import teacup from 'teacupweb';
 
-const client = teacupnet('YOUR_CLIENT_ID', 'YOUR_CLIENT_KEY');
+const client = teacup('YOUR_CLIENT_ID', 'YOUR_CLIENT_KEY');
 
 // Enable only specific tracking
 // Note: This requires manual implementation
@@ -239,11 +239,11 @@ The library works seamlessly with modern frameworks:
 ```javascript
 // React example
 import { useEffect } from 'react';
-import teacupnet from 'teacupnet-lib';
+import teacup from 'teacupweb';
 
 function App() {
   useEffect(() => {
-    const client = teacupnet(
+    const client = teacup(
       process.env.REACT_APP_CLIENT_ID,
       process.env.REACT_APP_CLIENT_KEY
     );
@@ -259,10 +259,10 @@ function App() {
 
 ## Data Synchronization
 
-Analytics data is automatically sent to the TeacupNet backend:
+Analytics data is automatically sent to the Teacup backend:
 
 - **Interval**: Every 5 seconds
-- **Endpoint**: `https://teacupnet-backend.vercel.app/api/analytics`
+- **Endpoint**: `https://backend.teacup.website/api/analytics`
 - **Included**: Fingerprint, client credentials, and collected analytics data
 
 ## Browser Support
@@ -283,8 +283,8 @@ Analytics data is automatically sent to the TeacupNet backend:
 **Example `.env` file:**
 
 ```env
-TEACUPNET_CLIENT_ID=your_client_id
-TEACUPNET_CLIENT_KEY=your_client_key
+TEACUP_CLIENT_ID=your_client_id
+TEACUP_CLIENT_KEY=your_client_key
 ```
 
 ## Troubleshooting
@@ -294,7 +294,7 @@ TEACUPNET_CLIENT_KEY=your_client_key
 Make sure you've called `client.analytics.track()` after initialization:
 
 ```javascript
-const client = teacupnet('CLIENT_ID', 'CLIENT_KEY');
+const client = teacup('CLIENT_ID', 'CLIENT_KEY');
 client.analytics.track(); // Don't forget this!
 ```
 
@@ -303,7 +303,7 @@ client.analytics.track(); // Don't forget this!
 Verify your `clientID` and `clientKey` are correct:
 
 ```javascript
-const client = teacupnet('CLIENT_ID', 'CLIENT_KEY');
+const client = teacup('CLIENT_ID', 'CLIENT_KEY');
 if (client.error) {
   console.error('Initialization failed:', client.message);
 }
@@ -319,12 +319,13 @@ if (client.error) {
 
 For issues, questions, or feature requests:
 
-- GitHub Issues: [https://github.com/tahmidjihan/teacupnet-lib/issues](https://github.com/tahmidjihan/teacupnet-lib/issues)
-- Repository: [https://github.com/tahmidjihan/teacupnet-lib](https://github.com/tahmidjihan/teacupnet-lib)
+- GitHub Issues: [https://github.com/tahmidjihan/teacup-lib/issues](https://github.com/tahmidjihan/teacup-lib/issues)
+- Repository: [https://github.com/tahmidjihan/teacup-lib](https://github.com/tahmidjihan/teacup-lib)
+- Website: [https://teacup.website](https://teacup.website)
 
 ## License
 
-ISC © Tahmid Jihan, Teacupnet
+ISC © Tahmid Jihan, Teacup
 
 ## Changelog
 

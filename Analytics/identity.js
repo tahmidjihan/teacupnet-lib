@@ -1,9 +1,9 @@
-const FINGERPRINT_KEY = 'teacupnet_fingerprint';
+const FINGERPRINT_KEY = 'teacup_fingerprint';
 
 export default function fingerprint() {
   // Check if fingerprint already exists in localStorage
   const existingFingerprint = localStorage.getItem(FINGERPRINT_KEY);
-  
+
   if (existingFingerprint) {
     return existingFingerprint;
   }
@@ -17,9 +17,9 @@ export default function fingerprint() {
 
   const data = canvas.toDataURL();
   const newFingerprint = data.slice(-32);
-  
+
   // Store in localStorage for future use
   localStorage.setItem(FINGERPRINT_KEY, newFingerprint);
-  
+
   return newFingerprint;
 }

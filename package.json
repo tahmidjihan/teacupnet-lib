@@ -1,6 +1,6 @@
 {
-  "name": "teacup-lib",
-  "version": "1.0.0",
+  "name": "teacupweb",
+  "version": "2.2.1",
   "description": "A powerful JavaScript library for integrating Teacup analytics and data management. Track user interactions, page views, form completions, and seamlessly connect to the Teacup backend.",
   "keywords": [
     "analytics",
