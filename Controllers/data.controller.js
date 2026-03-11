@@ -1,22 +1,33 @@
-import fetchAPI from '../Functions/FetchAPI';
+import fetchAPI from '../Functions/FetchAPI.js';
 import { initial } from '../index.js';
 
+/**
+ * Get all blogs for the authenticated client
+ * @returns {Promise<{message: string, blogs: Array, count: number}>}
+ */
 const getBlogs = async () => {
-  const id = initial.clientID;
-  const result = await fetchAPI(`dashboard/blogs/${id}`);
-  return result;
+  return await fetchAPI('api/blogs');
 };
 
+/**
+ * Get a specific blog by ID
+ * @param {string} id - Blog ID
+ * @returns {Promise<{message: string, blog: Object}>}
+ */
 const getBlog = async (id) => {
-  const clientID = initial.clientID;
-  return await fetchAPI(`dashboard/blogs/${clientID}/${id}`);
+  return await fetchAPI(`api/blogs/${id}`);
 };
 
-const postData = async (id, data) => {
-  return await fetchAPI('api/inboxData', 'POST', {
-    inbox_id: id,
+/**
+ * Submit data to an inbox
+ * @param {string} inboxId - Inbox ID
+ * @param {Object} data - Data to submit
+ * @returns {Promise<{message: string, inboxData: Object}>}
+ */
+const postData = async (inboxId, data) => {
+  return await fetchAPI('api/inbox', 'POST', {
+    inbox_id: inboxId,
     data: data,
-    initial: initial,
   });
 };
 

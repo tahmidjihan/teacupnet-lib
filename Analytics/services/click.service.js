@@ -1,13 +1,19 @@
-import data from './../data.controller';
+import data from './../data.controller.js';
 
+/**
+ * Track button clicks
+ * Listens for click events on BUTTON elements and records them
+ */
 function track() {
-  addEventListener('click', (e) => {
-    if (e.target.tagName == 'BUTTON') {
+  document.addEventListener('click', (e) => {
+    const button = e.target.closest('button');
+    if (button) {
       data.setData('button', {
-        button: e.target.innerText,
+        button: button.innerText || button.textContent || 'unknown-button',
         page: window.location.pathname,
       });
     }
   });
 }
+
 export default { track };

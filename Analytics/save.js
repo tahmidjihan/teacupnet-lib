@@ -1,10 +1,14 @@
-import fetchAPI from '../Functions/FetchAPI';
-import fingerprint from './identity';
-import data from './data.controller';
-import { initial } from '..';
+import fetchAPI from '../Functions/FetchAPI.js';
+import fingerprint from './identity.js';
+import data from './data.controller.js';
+import { initial } from '../index.js';
 
+/**
+ * Save analytics data to the backend
+ * Sends accumulated analytics events every 5 seconds
+ */
 export default function save() {
-  setInterval(() => {
+  setInterval(async () => {
     const newData = data.getNewData();
 
     // Check if there's any new data to send
@@ -14,11 +18,55 @@ export default function save() {
       newData.page.length > 0;
 
     if (hasNewData) {
-      fetchAPI('api/analytics', 'POST', {
-        data: newData,
-        fingerprint: fingerprint(),
-        initial: initial,
+      const fp = fingerprint();
+
+      // Send each event type separately to match API format
+      const promises = [];
+
+      // Send button events
+      newData.button.forEach((btn) => {
+        promises.push(
+          fetchAPI('api/analytics', 'POST', {
+            fingerprint: fp,
+            data: { type: 'button', ...btn },
+            initial: {
+              clientID: initial.clientID,
+              clientKey: initial.clientKey,
+            },
+          })
+        );
       });
+
+      // Send page events
+      newData.page.forEach((pg) => {
+        promises.push(
+          fetchAPI('api/analytics', 'POST', {
+            fingerprint: fp,
+            data: { type: 'page', ...pg },
+            initial: {
+              clientID: initial.clientID,
+              clientKey: initial.clientKey,
+            },
+          })
+        );
+      });
+
+      // Send form events
+      newData.form.forEach((frm) => {
+        promises.push(
+          fetchAPI('api/analytics', 'POST', {
+            fingerprint: fp,
+            data: { type: 'form', ...frm },
+            initial: {
+              clientID: initial.clientID,
+              clientKey: initial.clientKey,
+            },
+          })
+        );
+      });
+
+      // Wait for all requests to complete
+      await Promise.all(promises);
 
       // Clear data after sending
       data.clearData();

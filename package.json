@@ -1,6 +1,6 @@
 {
   "name": "teacupweb",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "A powerful JavaScript library for integrating Teacup analytics and data management. Track user interactions, page views, form completions, and seamlessly connect to the Teacup backend.",
   "keywords": [
     "analytics",
@@ -12,7 +12,10 @@
     "click-tracking",
     "visitor-tracking",
     "fingerprinting",
-    "web-analytics"
+    "web-analytics",
+    "blogs",
+    "inbox",
+    "data-management"
   ],
   "homepage": "https://github.com/tahmidjihan/teacup-lib#readme",
   "bugs": {
@@ -27,20 +30,22 @@
   "type": "module",
   "main": "index.js",
   "exports": "./index.js",
+  "types": "index.d.ts",
   "files": [
     "index.js",
     "index.d.ts",
     "Analytics/",
     "Controllers/",
     "Functions/",
+    "Middleware/",
     "README.md",
-    "LICENSE",
-    "CHANGELOG.md"
+    "LICENSE"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
     "node": ">=14.0.0"
-  }
+  },
+  "browser": true
 }

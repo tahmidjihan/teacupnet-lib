@@ -1,13 +1,25 @@
+/**
+ * Analytics data store for tracking user interactions
+ * Stores button clicks, form completions, and page views
+ */
 const data = {
   button: [],
   form: [],
   page: [],
 };
+
+/**
+ * Previous data store for deduplication
+ */
 const prevData = {
   button: [],
   form: [],
   page: [],
 };
+
+/**
+ * Clear current data and move to previous data
+ */
 const clearData = () => {
   prevData.button = [...data.button];
   prevData.form = [...data.form];
@@ -17,6 +29,11 @@ const clearData = () => {
   data.page = [];
 };
 
+/**
+ * Get new data that hasn't been sent yet
+ * Filters out duplicates based on previous data
+ * @returns {{button: Array, form: Array, page: Array}}
+ */
 const getNewData = () => {
   const newData = {
     button: [],
@@ -24,7 +41,7 @@ const getNewData = () => {
     page: [],
   };
 
-  // Compare buttons - only include if not in prevData
+  // Compare buttons - only include unique button+page combinations
   data.button.forEach((btn) => {
     const isDuplicate = prevData.button.some(
       (prevBtn) => prevBtn.button === btn.button && prevBtn.page === btn.page
@@ -34,7 +51,7 @@ const getNewData = () => {
     }
   });
 
-  // Compare pages - only include if page+percentage combo not in prevData
+  // Compare pages - only include unique page+percentage combinations
   data.page.forEach((pg) => {
     const isDuplicate = prevData.page.some(
       (prevPg) =>
@@ -45,11 +62,11 @@ const getNewData = () => {
     }
   });
 
-  // Compare forms - only include if form+percent combo not in prevData
+  // Compare forms - only include unique form+percentage combinations
   data.form.forEach((frm) => {
     const isDuplicate = prevData.form.some(
       (prevFrm) =>
-        prevFrm.form === frm.form && prevFrm.percent === frm.percent
+        prevFrm.form === frm.form && prevFrm.percentage === frm.percentage
     );
     if (!isDuplicate) {
       newData.form.push(frm);
@@ -59,6 +76,11 @@ const getNewData = () => {
   return newData;
 };
 
+/**
+ * Set analytics data
+ * @param {'button'|'form'|'page'} type - Type of analytics event
+ * @param {Object} result - Event data
+ */
 const setData = (type, result) => {
   if (type === 'page') {
     // Find existing page entry
@@ -88,19 +110,19 @@ const setData = (type, result) => {
     if (existingFormIndex !== -1) {
       // Update only if new percentage is higher
       const currentPercent =
-        parseFloat(data.form[existingFormIndex].percent) || 0;
-      const newPercent = parseFloat(result.percent) || 0;
+        parseFloat(data.form[existingFormIndex].percentage) || 0;
+      const newPercent = parseFloat(result.percentage) || 0;
 
       if (newPercent > currentPercent) {
-        data.form[existingFormIndex].percent = result.percent;
+        data.form[existingFormIndex].percentage = result.percentage;
       }
     } else {
       // Add new entry if it doesn't exist
       data.form.push(result);
     }
-  } else {
-    // For other types (like 'button'), just push without deduplication
-    data[type].push(result);
+  } else if (type === 'button') {
+    // For buttons, just push without deduplication
+    data.button.push(result);
   }
 
   return data;
