@@ -1,11 +1,14 @@
 import { initial } from '../index.js';
 
 /**
- * Base API URL - can be overridden via configuration
+ * Default production API base URL for the Teacup client API.
+ * Override at runtime by passing `{ apiUrl }` to `init()` (sets window.TEACUP_API_URL).
  */
+const DEFAULT_API_BASE_URL = 'https://api.teacup.website';
+
 const API_BASE_URL = typeof window !== 'undefined' && window.TEACUP_API_URL
   ? window.TEACUP_API_URL
-  : 'http://localhost:8001';
+  : DEFAULT_API_BASE_URL;
 
 /**
  * Fetch wrapper for Teacup API calls
@@ -19,6 +22,11 @@ export default async function fetchAPI(path, method = 'GET', body = null) {
     method: method,
     headers: {
       'Content-Type': 'application/json',
+      // Send the client credentials on every request so authenticated GETs
+      // (blogs, inbox metadata) work — not just POSTs that carry `initial` in
+      // the body. The client key is a public, per-site key by design.
+      'x-client-id': initial.clientID,
+      'x-client-key': initial.clientKey,
     },
   };
 

@@ -40,7 +40,6 @@ function init(clientID, clientKey, options = {}) {
   initial.clientID = clientID;
   initial.clientKey = clientKey;
 
-  console.log(initial);
   // Set custom API URL if provided
   if (options.apiUrl && typeof window !== "undefined") {
     window.TEACUP_API_URL = options.apiUrl;
