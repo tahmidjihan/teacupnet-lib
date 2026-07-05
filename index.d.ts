@@ -63,7 +63,7 @@ declare module 'teacupweb' {
   interface InboxController {
     submitData: (inboxId: string, data: any) => Promise<any>;
     getInbox: (id: string) => Promise<any>;
-    getInboxData: (id: string) => Promise<any>;
+    // getInboxData was removed: reading submissions is dashboard-only (see README).
   }
 
   /**

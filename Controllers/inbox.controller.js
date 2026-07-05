@@ -23,13 +23,9 @@ const getInbox = async (id) => {
   return await fetchAPI(`api/inbox/${id}`);
 };
 
-/**
- * Get all data for an inbox
- * @param {string} id - Inbox ID
- * @returns {Promise<{message: string, inboxData: Array, count: number}>}
- */
-const getInboxData = async (id) => {
-  return await fetchAPI(`api/inbox/${id}/data`);
-};
+// NOTE: getInboxData() was removed. Reading inbox submissions (which may contain
+// PII from contact forms) is not available through this public library because
+// the client key is embedded in browser JavaScript. Submissions are viewable
+// only in the authenticated Teacup dashboard.
 
-export default { submitData, getInbox, getInboxData };
+export default { submitData, getInbox };
