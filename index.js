@@ -3,6 +3,9 @@ import analytics from "./Analytics/analytics.controller.js";
 import blogsController from "./Controllers/blogs.controller.js";
 import inboxController from "./Controllers/inbox.controller.js";
 import analyticsApiController from "./Controllers/analytics-api.controller.js";
+import leadsController from "./Controllers/leads.controller.js";
+import appointmentsController from "./Controllers/appointments.controller.js";
+import testimonialsController from "./Controllers/testimonials.controller.js";
 
 /**
  * Teacup client configuration
@@ -26,7 +29,7 @@ export const initial = {
  * @param {string} clientID - Client ID for authentication
  * @param {string} clientKey - Client key for authentication
  * @param {Partial<TeacupConfig>} [options] - Optional configuration
- * @returns {{data: Object, analytics: Object, blogs: Object, inbox: Object, analyticsApi: Object} | {error: string, message: string}}
+ * @returns {{data: Object, analytics: Object, blogs: Object, inbox: Object, analyticsApi: Object, leads: Object, appointments: Object, testimonials: Object} | {error: string, message: string}}
  */
 function init(clientID, clientKey, options = {}) {
   if (!clientID || !clientKey) {
@@ -76,6 +79,24 @@ function init(clientID, clientKey, options = {}) {
      * Analytics API controller for manual analytics events
      */
     analyticsApi: analyticsApiController,
+
+    /**
+     * Leads controller — submit contact/quote forms into the Teacup dashboard
+     * (with built-in spam defenses), or auto-bind an existing form element.
+     */
+    leads: leadsController,
+
+    /**
+     * Appointments controller — fetch open slots, book, and cancel
+     * appointments against the business's configured availability.
+     */
+    appointments: appointmentsController,
+
+    /**
+     * Testimonials controller — submit testimonials for approval and fetch
+     * the approved ones for display.
+     */
+    testimonials: testimonialsController,
   };
 }
 

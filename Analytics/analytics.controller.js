@@ -1,7 +1,7 @@
-import clicks from './services/click.service';
-import page from './services/page.service';
-import forms from './services/forms.service';
-import save from './save';
+import clicks from './services/click.service.js';
+import page from './services/page.service.js';
+import forms from './services/forms.service.js';
+import save from './save.js';
 
 function track() {
   // Track button clicks

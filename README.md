@@ -151,6 +151,80 @@ const response = await client.data.postData('inbox123', {
 });
 ```
 
+### Leads Module
+
+Submit contact/quote/consultation forms straight into the Teacup dashboard's
+Leads pipeline. Submissions are spam-filtered server-side (honeypot,
+time-to-submit, rate limiting) and deduplicated on double-clicks.
+
+#### `client.leads.submit(lead)`
+
+```javascript
+const result = await client.leads.submit({
+  name: 'Jane Doe',
+  email: 'jane@example.com',
+  message: 'I would like a quote for a kitchen remodel',
+  type: 'QUOTE', // CONTACT | QUOTE | CONSULTATION | OTHER
+  phone: '+1 555 0100', // optional
+  fields: { budget: '10-20k' }, // optional extra fields
+});
+```
+
+UTM parameters on the current URL are captured automatically.
+
+#### `client.leads.bindForm(formOrSelector, options?)`
+
+Auto-wires an existing `<form>`: inputs named `name`, `email`, `message`,
+`phone` map to the lead; all other named inputs land in `fields`. Add a
+hidden input named `website` as a spam honeypot — real users never fill it.
+
+```javascript
+const unbind = client.leads.bindForm('#contact-form', {
+  type: 'CONTACT',
+  onSuccess: () => alert('Thanks! We will get back to you.'),
+});
+```
+
+### Appointments Module
+
+Let visitors book appointments against the availability configured in the
+Teacup dashboard (Dashboard → Appointments → Settings).
+
+```javascript
+// 1. Show open slots for a date (business timezone)
+const { configured, slots } = await client.appointments.getAvailability('2026-08-01');
+
+// 2. Book one of the returned slots
+const booking = await client.appointments.book({
+  date: '2026-08-01',
+  startsAt: slots[0].startsAt,
+  customerName: 'Jane Doe',
+  customerEmail: 'jane@example.com',
+  service: 'Consultation', // optional
+});
+
+// 3. Cancel later — the single-use cancel token is stored in the visitor's
+//    browser automatically, or pass booking.cancelToken explicitly.
+await client.appointments.cancel(booking.id);
+```
+
+Booking returns `409 Slot unavailable` if someone takes the slot first —
+re-fetch availability and let the visitor pick again.
+
+### Testimonials Module
+
+```javascript
+// Fetch approved testimonials for display (only APPROVED ones are returned)
+const { testimonials } = await client.testimonials.getApproved();
+
+// Submit a new testimonial — it stays hidden until approved in the dashboard
+await client.testimonials.submit({
+  authorName: 'Jane Doe',
+  body: 'Great service!',
+  rating: 5,
+});
+```
+
 ## Analytics Details
 
 ### Button Click Tracking

@@ -81,6 +81,81 @@ declare module 'teacupweb' {
   }
 
   /**
+   * Leads controller interface
+   */
+  interface LeadInput {
+    name: string;
+    email: string;
+    message: string;
+    type?: 'CONTACT' | 'QUOTE' | 'CONSULTATION' | 'OTHER';
+    phone?: string;
+    fields?: Record<string, any>;
+    source?: string;
+    /** Honeypot — include as a hidden input users never fill */
+    website?: string;
+  }
+
+  interface LeadsController {
+    submit: (lead: LeadInput) => Promise<any>;
+    bindForm: (
+      formOrSelector: string | HTMLFormElement,
+      options?: {
+        type?: LeadInput['type'];
+        source?: string;
+        onSuccess?: (result: any) => void;
+        onError?: (error: any) => void;
+      }
+    ) => () => void;
+  }
+
+  /**
+   * Appointments controller interface
+   */
+  interface AppointmentSlot {
+    startsAt: string;
+    endsAt: string;
+  }
+
+  interface BookingInput {
+    /** Calendar date in the business timezone, "YYYY-MM-DD" */
+    date: string;
+    /** Slot start ISO string from getAvailability() */
+    startsAt: string;
+    customerName: string;
+    customerEmail: string;
+    customerPhone?: string;
+    service?: string;
+    notes?: string;
+    website?: string;
+  }
+
+  interface AppointmentsController {
+    getAvailability: (
+      date: string
+    ) => Promise<{ configured: boolean; slots: AppointmentSlot[] }>;
+    book: (booking: BookingInput) => Promise<any>;
+    cancel: (id: string, token?: string | null, reason?: string) => Promise<any>;
+  }
+
+  /**
+   * Testimonials controller interface
+   */
+  interface TestimonialInput {
+    authorName: string;
+    body: string;
+    company?: string;
+    role?: string;
+    /** 1-5 */
+    rating?: number;
+    website?: string;
+  }
+
+  interface TestimonialsController {
+    getApproved: () => Promise<any>;
+    submit: (testimonial: TestimonialInput) => Promise<any>;
+  }
+
+  /**
    * Init result interface
    */
   interface InitResult {
@@ -105,6 +180,18 @@ declare module 'teacupweb' {
      * Analytics API controller
      */
     analyticsApi: AnalyticsApiController;
+    /**
+     * Leads controller — contact/quote form submissions
+     */
+    leads: LeadsController;
+    /**
+     * Appointments controller — availability, booking, cancellation
+     */
+    appointments: AppointmentsController;
+    /**
+     * Testimonials controller — submit + fetch approved
+     */
+    testimonials: TestimonialsController;
   }
 
   /**
