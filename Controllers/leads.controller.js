@@ -28,7 +28,7 @@ const submit = async (lead) => {
       if (value) utm[key] = value;
     }
   }
-  return await fetchAPI('api/leads', 'POST', {
+  return await fetchAPI('api/client/leads', 'POST', {
     ...lead,
     source: lead.source || (typeof window !== 'undefined' ? window.location.pathname : undefined),
     utm: Object.keys(utm).length ? utm : undefined,

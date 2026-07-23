@@ -6,6 +6,7 @@ import analyticsApiController from "./Controllers/analytics-api.controller.js";
 import leadsController from "./Controllers/leads.controller.js";
 import appointmentsController from "./Controllers/appointments.controller.js";
 import testimonialsController from "./Controllers/testimonials.controller.js";
+import headTagsController from "./Controllers/headTags.controller.js";
 
 /**
  * Teacup client configuration
@@ -22,6 +23,9 @@ export const initial = {
  * @property {string} clientKey - Client key for authentication
  * @property {string} [apiUrl] - Optional custom API URL (default: http://localhost:8001)
  * @property {boolean} [autoTrack] - Enable automatic analytics tracking (default: true)
+ * @property {boolean} [autoInjectHeadTags] - Automatically fetch and inject
+ *   this company's custom head tags (meta/link/script/style/noscript) into
+ *   document.head on init (default: true)
  */
 
 /**
@@ -51,6 +55,11 @@ function init(clientID, clientKey, options = {}) {
   // Start automatic tracking if enabled
   if (options.autoTrack !== false && typeof document !== "undefined") {
     analytics.track();
+  }
+
+  // Inject custom <head> tags (meta/link/script/style/noscript) unless disabled
+  if (options.autoInjectHeadTags !== false && typeof document !== "undefined") {
+    headTagsController.inject();
   }
 
   return {
@@ -97,6 +106,15 @@ function init(clientID, clientKey, options = {}) {
      * the approved ones for display.
      */
     testimonials: testimonialsController,
+
+    /**
+     * Head tags controller — injects the company's custom <head> tags
+     * (meta/link/script/style/noscript) into document.head. Runs
+     * automatically on init unless `autoInjectHeadTags: false` was passed;
+     * exposed here so it can be re-run manually (e.g. after a client-side
+     * route change in an SPA).
+     */
+    headTags: headTagsController,
   };
 }
 

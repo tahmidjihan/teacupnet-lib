@@ -8,7 +8,7 @@ import { initial } from '../index.js';
  * @returns {Promise<{message: string, analytics: Object}>}
  */
 const submitEvent = async (fingerprint, data) => {
-  return await fetchAPI('api/analytics', 'POST', {
+  return await fetchAPI('api/client/analytics', 'POST', {
     fingerprint,
     data,
     initial: {
@@ -25,7 +25,7 @@ const submitEvent = async (fingerprint, data) => {
  * @returns {Promise<{message: string, uniqueSets: Array, data: Array, count: number}>}
  */
 const getAnalytics = async (owner, event) => {
-  return await fetchAPI(`api/analytics/${owner}?event=${event}`);
+  return await fetchAPI(`api/client/analytics/${owner}?event=${event}`);
 };
 
 export default { submitEvent, getAnalytics };

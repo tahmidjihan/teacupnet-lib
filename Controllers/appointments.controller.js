@@ -34,7 +34,7 @@ function recallCancelToken(id) {
  * @returns {Promise<{configured: boolean, slots: Array<{startsAt: string, endsAt: string}>}>}
  */
 const getAvailability = async (date) => {
-  return await fetchAPI(`api/appointments/availability?date=${encodeURIComponent(date)}`);
+  return await fetchAPI(`api/client/appointments/availability?date=${encodeURIComponent(date)}`);
 };
 
 /**
@@ -51,7 +51,7 @@ const getAvailability = async (date) => {
  *   Keep `cancelToken` if you want to offer cancellation — it is shown once.
  */
 const book = async (booking) => {
-  const result = await fetchAPI('api/appointments', 'POST', {
+  const result = await fetchAPI('api/client/appointments', 'POST', {
     ...booking,
     startedAt: loadedAt,
   });
@@ -77,7 +77,7 @@ const cancel = async (id, token = null, reason = undefined) => {
       message: 'No cancel token available for this appointment',
     };
   }
-  return await fetchAPI('api/appointments/cancel', 'POST', {
+  return await fetchAPI('api/client/appointments/cancel', 'POST', {
     id,
     token: cancelToken,
     reason,

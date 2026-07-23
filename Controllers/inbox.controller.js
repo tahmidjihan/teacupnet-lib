@@ -8,7 +8,7 @@ import { initial } from '../index.js';
  * @returns {Promise<{message: string, inboxData: Object}>}
  */
 const submitData = async (inboxId, data) => {
-  return await fetchAPI('api/inbox', 'POST', {
+  return await fetchAPI('api/client/inbox', 'POST', {
     inbox_id: inboxId,
     data: data,
   });
@@ -20,7 +20,7 @@ const submitData = async (inboxId, data) => {
  * @returns {Promise<{message: string, inbox: Object}>}
  */
 const getInbox = async (id) => {
-  return await fetchAPI(`api/inbox/${id}`);
+  return await fetchAPI(`api/client/inbox/${id}`);
 };
 
 // NOTE: getInboxData() was removed. Reading inbox submissions (which may contain

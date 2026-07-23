@@ -9,6 +9,7 @@ A powerful JavaScript library for integrating Teacup analytics and data manageme
 - 📈 **Page Scroll Tracking**: Monitor how far users scroll on each page
 - 🔒 **Fingerprinting**: Unique visitor identification using canvas fingerprinting
 - 🚀 **Easy Integration**: Simple initialization and automatic data synchronization
+- 🏷️ **Custom Head Tags**: Auto-injects dashboard-configured meta/link/script/style tags into `<head>`
 - 📦 **Lightweight**: Minimal dependencies, optimized for performance
 
 ## Installation
@@ -225,6 +226,34 @@ await client.testimonials.submit({
 });
 ```
 
+### Head Tags Module
+
+Custom `<meta>`, `<link>`, `<script>`, `<style>`, and `<noscript>` tags — configured
+in the Teacup dashboard — are fetched and injected into `document.head`
+automatically when `init()` runs. There's nothing to call for the common case:
+
+```javascript
+import init from 'teacupweb';
+
+// Enabled head tags are injected into <head> as soon as this runs
+init('your-client-id', 'your-client-key');
+```
+
+Opt out of the automatic injection (e.g. to control timing yourself) with
+`autoInjectHeadTags: false`, then call `client.headTags.inject()` when ready.
+Also useful to re-run after a client-side route change in a single-page app:
+
+```javascript
+const client = init('your-client-id', 'your-client-key', {
+  autoInjectHeadTags: false,
+});
+
+await client.headTags.inject();
+```
+
+Tags already present on the page (matched by id) are never duplicated, so
+`inject()` is safe to call more than once.
+
 ## Analytics Details
 
 ### Button Click Tracking
@@ -336,7 +365,7 @@ function App() {
 Analytics data is automatically sent to the Teacup backend:
 
 - **Interval**: Every 5 seconds
-- **Endpoint**: `https://backend.teacup.website/api/analytics`
+- **Endpoint**: `https://backend.teacup.website/api/client/analytics`
 - **Included**: Fingerprint, client credentials, and collected analytics data
 
 ## Browser Support

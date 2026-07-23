@@ -26,7 +26,7 @@ export default function save() {
       // Send button events
       newData.button.forEach((btn) => {
         promises.push(
-          fetchAPI('api/analytics', 'POST', {
+          fetchAPI('api/client/analytics', 'POST', {
             fingerprint: fp,
             data: { type: 'button', ...btn },
             initial: {
@@ -40,7 +40,7 @@ export default function save() {
       // Send page events
       newData.page.forEach((pg) => {
         promises.push(
-          fetchAPI('api/analytics', 'POST', {
+          fetchAPI('api/client/analytics', 'POST', {
             fingerprint: fp,
             data: { type: 'page', ...pg },
             initial: {
@@ -54,7 +54,7 @@ export default function save() {
       // Send form events
       newData.form.forEach((frm) => {
         promises.push(
-          fetchAPI('api/analytics', 'POST', {
+          fetchAPI('api/client/analytics', 'POST', {
             fingerprint: fp,
             data: { type: 'form', ...frm },
             initial: {

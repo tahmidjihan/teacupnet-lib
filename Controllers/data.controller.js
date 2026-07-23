@@ -6,7 +6,7 @@ import { initial } from '../index.js';
  * @returns {Promise<{message: string, blogs: Array, count: number}>}
  */
 const getBlogs = async () => {
-  return await fetchAPI('api/blogs');
+  return await fetchAPI('api/client/blogs');
 };
 
 /**
@@ -15,7 +15,7 @@ const getBlogs = async () => {
  * @returns {Promise<{message: string, blog: Object}>}
  */
 const getBlog = async (id) => {
-  return await fetchAPI(`api/blogs/${id}`);
+  return await fetchAPI(`api/client/blogs/${id}`);
 };
 
 /**
@@ -25,7 +25,7 @@ const getBlog = async (id) => {
  * @returns {Promise<{message: string, inboxData: Object}>}
  */
 const postData = async (inboxId, data) => {
-  return await fetchAPI('api/inbox', 'POST', {
+  return await fetchAPI('api/client/inbox', 'POST', {
     inbox_id: inboxId,
     data: data,
   });

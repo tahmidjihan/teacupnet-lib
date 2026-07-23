@@ -4,7 +4,7 @@ import { initial } from '../index.js';
  * Default production API base URL for the Teacup client API.
  * Override at runtime by passing `{ apiUrl }` to `init()` (sets window.TEACUP_API_URL).
  */
-const DEFAULT_API_BASE_URL = 'https://api.teacup.website';
+const DEFAULT_API_BASE_URL = 'https://backend.teacup.website';
 
 const API_BASE_URL = typeof window !== 'undefined' && window.TEACUP_API_URL
   ? window.TEACUP_API_URL
@@ -12,7 +12,7 @@ const API_BASE_URL = typeof window !== 'undefined' && window.TEACUP_API_URL
 
 /**
  * Fetch wrapper for Teacup API calls
- * @param {string} path - API path (e.g., 'api/blogs')
+ * @param {string} path - API path (e.g., 'api/client/blogs')
  * @param {'GET'|'POST'|'PUT'|'DELETE'|'PATCH'} method - HTTP method
  * @param {Object|null} body - Request body
  * @returns {Promise<any>} Response data

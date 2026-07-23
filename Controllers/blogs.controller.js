@@ -8,7 +8,7 @@ import { initial } from '../index.js';
  */
 const getAllBlogs = async (ownerId = null) => {
   const id = ownerId || initial.clientID;
-  const result = await fetchAPI(`api/blogs${ownerId ? `?ownerId=${ownerId}` : ''}`);
+  const result = await fetchAPI(`api/client/blogs${ownerId ? `?ownerId=${ownerId}` : ''}`);
   return result;
 };
 
@@ -18,7 +18,7 @@ const getAllBlogs = async (ownerId = null) => {
  * @returns {Promise<{message: string, blog: Object}>}
  */
 const getBlogById = async (id) => {
-  return await fetchAPI(`api/blogs/${id}`);
+  return await fetchAPI(`api/client/blogs/${id}`);
 };
 
 export default { getAllBlogs, getBlogById };

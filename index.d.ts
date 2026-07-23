@@ -7,6 +7,7 @@ declare module 'teacupweb' {
     clientKey: string;
     apiUrl?: string;
     autoTrack?: boolean;
+    autoInjectHeadTags?: boolean;
   }
 
   /**
@@ -156,6 +157,18 @@ declare module 'teacupweb' {
   }
 
   /**
+   * Head tags controller interface
+   */
+  interface HeadTagsController {
+    /**
+     * Fetch this company's enabled head tags and inject them into
+     * document.head. Runs automatically on init; call again manually if
+     * needed (e.g. after a client-side route change in an SPA).
+     */
+    inject: () => Promise<void>;
+  }
+
+  /**
    * Init result interface
    */
   interface InitResult {
@@ -192,6 +205,10 @@ declare module 'teacupweb' {
      * Testimonials controller — submit + fetch approved
      */
     testimonials: TestimonialsController;
+    /**
+     * Head tags controller — inject custom <head> tags
+     */
+    headTags: HeadTagsController;
   }
 
   /**

@@ -8,7 +8,7 @@ const loadedAt = Date.now();
  * @returns {Promise<{message: string, testimonials: Array}>}
  */
 const getApproved = async () => {
-  return await fetchAPI('api/testimonials');
+  return await fetchAPI('api/client/testimonials');
 };
 
 /**
@@ -23,7 +23,7 @@ const getApproved = async () => {
  * @returns {Promise<{message: string, id?: string}>}
  */
 const submit = async (testimonial) => {
-  return await fetchAPI('api/testimonials', 'POST', {
+  return await fetchAPI('api/client/testimonials', 'POST', {
     ...testimonial,
     startedAt: loadedAt,
   });
